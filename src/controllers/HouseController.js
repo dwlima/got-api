@@ -7,9 +7,9 @@ module.exports = {
     const { name } = req.query;
     let items = [];
     if(name){
-      items = await House.find({ name: { $regex: name, $options:'i' }}).populate("currentLord").sort('name');
+      items = await House.find({ name: { $regex: name, $options:'i' }}, { name:1, region: 1, fouded: 1}).populate("currentLord", {name: 1, seasons: 1}).sort('name');
     } else {
-      items = await House.find().populate("currentLord").sort('name');
+      items = await House.find({},{ name:1, region: 1, fouded: 1}).populate("currentLord", {name: 1, seasons: 1}).sort('name');
     }
     return res.json(items);
   },

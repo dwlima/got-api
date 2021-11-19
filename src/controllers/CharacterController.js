@@ -3,15 +3,15 @@ const Character = require('../models/Character');
 module.exports = {
 
   async index(req, res, next) {
-    const items = await Character.find().sort('nome');
+    const items = await Character.find({},{name: 1, seasons: 1}).sort('nome');
     return res.json(items);
   },
 
 	async show(req, res, next) {
     const { id } = req.params;
-    const item = await Character.findById(id);
+    const item = await Character.findById(id,{name: 1, seasons: 1});
 		if(!item){
-			return res.status(400).json({ error: 'Character not exists' });
+			return res.status(200).json({ error: 'Character not exists' });
 		}
 		return res.json(item);
   },
@@ -20,14 +20,14 @@ module.exports = {
     const { name, seasons } = req.body;
 
     if(!name || !seasons){
-      return res.status(400).json({ error: 'Preencha todos os campos' });
+      return res.status(200).json({ error: 'Preencha todos os campos' });
     }
 
-		await Character.create({
+		const character = await Character.create({
 			name,
       seasons
 		});
-		return res.json({ ok: true });
+		return res.json(character);
   },
 
   async update(req, res){
@@ -36,11 +36,11 @@ module.exports = {
 		const character = await Character.findById(id);
 
     if(!name || !seasons){
-      return res.status(400).json({ error: 'Preencha o campo nome e URL da API' });
+      return res.status(200).json({ error: 'Preencha o campo nome e URL da API' });
     }
 
 		if(!character){
-			return res.status(400).json({ error: 'Personagem não existe' });
+			return res.status(200).json({ error: 'Personagem não existe' });
 		}
 
 
@@ -56,7 +56,7 @@ module.exports = {
 		const { id } = req.params;
 		const character = await Character.findById(id);
 		if(!character){
-			return res.status(400).json({ error: 'Character not exists' });
+			return res.status(200).json({ error: 'Character not exists' });
 		}
 		await character.delete();
 
