@@ -11,7 +11,6 @@ module.exports = {
     } else {
       items = await House.find().populate("currentLord").sort('name');
     }
-
     return res.json(items);
   },
 
@@ -19,7 +18,7 @@ module.exports = {
     const { id } = req.params;
     const item = await House.findById(id).populate("currentLord");
 		if(!item){
-			return res.status(400).json({ error: 'House not exists' });
+			return res.status(200).json({ error: 'House not exists' });
 		}
 		return res.json(item);
   },
@@ -28,7 +27,7 @@ module.exports = {
     const { name, region, founded, currentLord } = req.body;
 
     if(!name || !region || !founded || !currentLord){
-      return res.status(400).json({ error: 'Preencha todos os campos' });
+      return res.status(200).json({ error: 'Preencha todos os campos' });
     }
 
 		const house = await House.create({
@@ -37,7 +36,7 @@ module.exports = {
       founded,
       currentLord
 		});
-		return res.json({ ok: true });
+		return res.json(house);
   },
 
   async update(req, res){
@@ -47,11 +46,11 @@ module.exports = {
 		const house = await House.findById(id);
 
 		if(!house){
-			return res.status(400).json({ error: 'house not exists' });
+			return res.status(200).json({ error: 'house not exists' });
 		}
 
     if(!name || !region || !founded || !currentLord){
-      return res.status(400).json({ error: 'Preencha todos os campos' });
+      return res.status(200).json({ error: 'Preencha todos os campos' });
     }
 
 		house.name = name;
@@ -68,7 +67,7 @@ module.exports = {
 		const { id } = req.params;
 		const house = await House.findById(id);
 		if(!house){
-			return res.status(400).json({ error: 'House not exists' });
+			return res.status(200).json({ error: 'House not exists' });
 		}
 		await house.delete();
 

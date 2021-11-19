@@ -55,3 +55,4 @@ mongoose.connection.on('disconnected', function () {
   console.log('Mongoose disconnected');
 });
 
+module.exports = app;
