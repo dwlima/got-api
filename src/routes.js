@@ -6,7 +6,7 @@ const HouseController = require('./controllers/HouseController');
 const routes = new express.Router();
 
 routes.get('/', (req, res) => {
-  return res.send(`Server ok!`);
+  return res.send(`GOT API Server ok!`);
 });
 
 // characters
