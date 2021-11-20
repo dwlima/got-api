@@ -14,8 +14,8 @@ mongoose.connect(config.connectionString,{
 });
 
 // for debug
-//mongoose.set('debug', true);
-//mongoose.set('bufferCommands', false);
+mongoose.set('debug', true);
+mongoose.set('bufferCommands', false);
 
 // define connection events
 mongoose.connection.on('connected', function () {

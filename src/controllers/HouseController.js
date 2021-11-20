@@ -36,6 +36,7 @@ module.exports = {
       founded,
       currentLord
 		});
+
 		return res.json(house);
   },
 
