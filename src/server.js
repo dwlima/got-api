@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const config = require('./config.json');
 const errorHandler = require('./_helpers/error-handler');
+const swaggerUi = require('swagger-ui-express');
+const swaggerFile = require('./dwlima-GOT-1.0.0-resolved.json');
 
 
 const app = express();
@@ -28,6 +30,8 @@ mongoose.connection.on('connected', function () {
   app.use(cors());
 
   app.use(express.json());
+
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
   // use JWT auth to secure the api
   //app.use(jwt());

@@ -55,7 +55,7 @@ module.exports = {
     }
 
     const date = "2021-12-08";
-    const dateNow = new Date(); 
+    const dateNow = new Date();
     let now = dateNow.getHours() * 60 + dateNow.getMinutes();
     //now = (21 * 60) + 59;
 

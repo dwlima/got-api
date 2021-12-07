@@ -1,0 +1,432 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a simple GOT API",
+    "version": "1.0.0",
+    "title": "GOT House API",
+    "contact": {
+      "email": "dwlima@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "virtserver.swaggerhub.com",
+  "basePath": "/dwlima/GOT/1.0.0",
+  "tags": [
+    {
+      "name": "characters",
+      "description": "endpoints for characters"
+    },
+    {
+      "name": "houses",
+      "description": "endpoints for houses"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/characters": {
+      "get": {
+        "tags": [
+          "characters"
+        ],
+        "summary": "Lista os personagens",
+        "operationId": "listCharacters",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "lista de personagens",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Character"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "characters"
+        ],
+        "summary": "Adiciona o personagem",
+        "description": "Adiciona o personagem no banco",
+        "operationId": "addCharacter",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "characterItem",
+            "description": "Personagem para adicionar",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Character"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Item criado"
+          }
+        }
+      }
+    },
+    "/characters/{id}": {
+      "get": {
+        "tags": [
+          "characters"
+        ],
+        "summary": "Carrega um personagem",
+        "operationId": "getCharacter",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do personagem",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "retorna um personagem",
+            "schema": {
+              "$ref": "#/definitions/Character"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "characters"
+        ],
+        "summary": "Altera o personagem",
+        "description": "Altera o personagem no banco",
+        "operationId": "editCharacter",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do personagem",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "characterItem",
+            "description": "Personagem para alterar",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Character"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Item alterado"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "characters"
+        ],
+        "summary": "Exclui o personagem",
+        "description": "Exclui o personagem do banco",
+        "operationId": "deleteCharacter",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do personagem",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Item excluido"
+          }
+        }
+      }
+    },
+    "/houses": {
+      "get": {
+        "tags": [
+          "houses"
+        ],
+        "summary": "Lista as casas",
+        "operationId": "listHouses",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "lista de casas",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/House"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "houses"
+        ],
+        "summary": "Adiciona a casa",
+        "description": "Adiciona a casa no banco",
+        "operationId": "addHouse",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "characterItem",
+            "description": "Casa para adicionar",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/House"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Item criado"
+          }
+        }
+      }
+    },
+    "/houses/{id}": {
+      "get": {
+        "tags": [
+          "houses"
+        ],
+        "summary": "Carrega uma casa",
+        "operationId": "getHouse",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID da casa",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "retorna uma casa",
+            "schema": {
+              "$ref": "#/definitions/HouseReturn"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "houses"
+        ],
+        "summary": "Altera a casa",
+        "description": "Altera a casa no banco",
+        "operationId": "editHouse",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID da casa",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "characterItem",
+            "description": "Casa para alterar",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/House"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Item alterado"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "houses"
+        ],
+        "summary": "Exclui a casa",
+        "description": "Exclui a casa do banco",
+        "operationId": "deleteHouse",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID da casa",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Item excluido"
+          }
+        }
+      }
+    },
+    "/houses?name={name}": {
+      "get": {
+        "tags": [
+          "houses"
+        ],
+        "summary": "Busca casa por nome",
+        "operationId": "searchHouses",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Nome da casa",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "lista de casas",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/HouseReturn"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Character": {
+      "required": [
+        "name",
+        "seasons"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Jon Snow"
+        },
+        "seasons": {
+          "type": "array",
+          "example": ""
+        }
+      }
+    },
+    "House": {
+      "type": "object",
+      "required": [
+        "currentLord",
+        "founded",
+        "name",
+        "region"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "House Allyrion of Godsgrace"
+        },
+        "region": {
+          "type": "string",
+          "example": "Dorne"
+        },
+        "founded": {
+          "type": "string",
+          "example": "299 AC"
+        },
+        "currentLord": {
+          "type": "string",
+          "format": "objectID",
+          "example": "6196cf32890bd1270a955305"
+        }
+      }
+    },
+    "HouseReturn": {
+      "type": "object",
+      "required": [
+        "currentLord",
+        "founded",
+        "name",
+        "region"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "House Allyrion of Godsgrace"
+        },
+        "region": {
+          "type": "string",
+          "example": "Dorne"
+        },
+        "founded": {
+          "type": "string",
+          "example": "299 AC"
+        },
+        "currentLord": {
+          "$ref": "#/definitions/Character"
+        }
+      }
+    }
+  }
+}

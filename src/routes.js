@@ -10,6 +10,7 @@ routes.get('/', (req, res) => {
   return res.send(`GOT API Server ok!`);
 });
 
+
 // teste
 routes.get('/test/', TestController.index);
 
