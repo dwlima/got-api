@@ -2,12 +2,16 @@ const express = require('express');
 
 const CharacterController = require('./controllers/CharacterController');
 const HouseController = require('./controllers/HouseController');
+const TestController = require('./controllers/TestController');
 
 const routes = new express.Router();
 
 routes.get('/', (req, res) => {
   return res.send(`GOT API Server ok!`);
 });
+
+// teste
+routes.get('/test/', TestController.index);
 
 // characters
 routes.get('/characters/', CharacterController.index);
