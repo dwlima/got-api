@@ -1,9 +1,10 @@
+const moment = require('moment');
 
 module.exports = {
 
   async index(req, res, next) {
 
-    const data = {
+    const hourConfig = {
       "2021-12-08": {
         "weekday": 3,
         "slots": [
@@ -54,29 +55,47 @@ module.exports = {
       }
     }
 
-    const date = "2021-12-08";
-    const dateNow = new Date();
-    let now = dateNow.getHours() * 60 + dateNow.getMinutes();
-    //now = (21 * 60) + 59;
+    /**
+     * /- o array de slot pode vir vazio
+     * /- formatar a data (moment)
+     * /- end_minute_in_day talvez nao venha mesmo e tem que fazer o parser no text
+     **/
+     const dateNow = new Date();
+     const date = moment(dateNow).format('YYYY-MM-DD');
+     
+     if(hourConfig[date].slots && hourConfig[date].slots.length > 0) {
 
-    const slotFirst = data[date]['slots'][0];
-    const slotLast = data[date]['slots'][data[date]['slots'].length-1];
+      //const now = dateNow.getHours() * 60 + dateNow.getMinutes();
+      const now = (22 * 60) + 59;
 
-    const startMinuteInDay = slotFirst.start_minute_in_day;
-    const closeMinuteInDay = slotLast.end_minute_in_day;
+      const slotFirst = hourConfig[date].slots[0];
+      const slotLast = hourConfig[date].slots[hourConfig[date].slots.length-1];
 
-    console.log("data");
-    console.log(startMinuteInDay);
-    console.log(closeMinuteInDay);
-    console.log("now: " + now);
+      const startMinuteInDay = slotFirst.start_minute_in_day;
+      const closeMinuteInDay = slotLast.end_minute_in_day;
 
-    if(startMinuteInDay <= now && now < closeMinuteInDay){
-      console.log("loja esta aberta");
+      console.log("data");
+      console.log(startMinuteInDay);
+      console.log(closeMinuteInDay);
+      console.log("now: " + now);
+
+      if (startMinuteInDay > now || now >= closeMinuteInDay) {
+        console.log("loja fechada");
+      } else {
+        console.log("loja aberta");
+      }
+      /*
+      if(startMinuteInDay <= now && now < closeMinuteInDay){
+        console.log("loja está aberta");
+      } else {
+        console.log("loja está fechada");
+      }
+      */
+
     } else {
-      console.log("loja está fechada")
+      console.log("loja está fechada2");
     }
-    
-		return res.json(data);
+		return res.json(hourConfig);
   },
 
   // -----------------------------------------------------------------------------------
