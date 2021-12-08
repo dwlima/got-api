@@ -65,8 +65,8 @@ module.exports = {
      
      if(hourConfig[date].slots && hourConfig[date].slots.length > 0) {
 
-      //const now = dateNow.getHours() * 60 + dateNow.getMinutes();
-      const now = (22 * 60) + 59;
+      const now = dateNow.getHours() * 60 + dateNow.getMinutes();
+      //const now = (22 * 60) + 59;
 
       const slotFirst = hourConfig[date].slots[0];
       const slotLast = hourConfig[date].slots[hourConfig[date].slots.length-1];
@@ -80,18 +80,10 @@ module.exports = {
       console.log("now: " + now);
 
       if (startMinuteInDay > now || now >= closeMinuteInDay) {
-        console.log("loja fechada");
+        console.log('loja fechada');
       } else {
-        console.log("loja aberta");
+        console.log('loja aberta');
       }
-      /*
-      if(startMinuteInDay <= now && now < closeMinuteInDay){
-        console.log("loja está aberta");
-      } else {
-        console.log("loja está fechada");
-      }
-      */
-
     } else {
       console.log("loja está fechada2");
     }
